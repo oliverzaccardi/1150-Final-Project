@@ -10,14 +10,29 @@ get_HTML = requests.get(
 parse_HTML = BeautifulSoup(get_HTML.text, 'html.parser')
 data = parse_HTML.find_all('table')
 results = data[4]
-# class_name_and_IDnum = results.find_all('div', attrs={'class': 'meta'})
-# print(class_name_and_num)
-# day = results.find_all('abbr')
-# print(day)
-# time_and_room_num = results.find_all('div', attrs={'style': 'white-space: nowrap;overflow: hidden;'})
-# print(time_and_room_num)
 table_data = results.find_all('td')
-print(table_data)
+
+records = []
+for result in results:
+    id_number = table_data[2].contents[0]
+
+    course_number = table_data[4].contents[0]
+
+    section_number = table_data[5].contents[0]
+
+    course = results.select('div>a')[3]
+    course_name = course.contents[0]
+
+    day = results.find('abbr')
+    course_day = day.contents[0]
+
+    time = table_data[9].text
+
+    course_credits = table_data[10].text
+
+    instructor = table_data[12].text
+    records.append((id_number, course_number, section_number, course_name, course_day, time, course_credits,
+                    instructor))
+print(records)
 # TODO
 #  extract spreadsheet column titles and data
-
