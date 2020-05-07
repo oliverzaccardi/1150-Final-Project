@@ -39,4 +39,4 @@ print(data)
 workbook.save('itec_courses.xlsx')
 
 
-# TODO: figure out how to get rid of extra characters and add data to spreadsheet.
+# TODO: figure out how to get rid of extra characters and add data to spreadsheet
