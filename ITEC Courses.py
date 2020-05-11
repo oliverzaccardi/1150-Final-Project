@@ -27,16 +27,13 @@ worksheet.cell(1, 6, 'Time Class Meets')
 worksheet.cell(1, 7, 'Credits')
 worksheet.cell(1, 8, 'Instructor')
 
-data = []
 for row in course_table.find_all('tr'):
+    data = []
     for cell in row.find_all('td'):
         data.append(cell.text.strip())
-        for index, result in enumerate(data):
-            row = index + 2
-            worksheet.cell(row, 1, result)
     for result in data:
         if result == '':
             data.remove(result)
+    print(data)
 
 workbook.save('itec_courses.xlsx')
-print(data)
