@@ -22,21 +22,26 @@ worksheet.cell(1, 1, 'ID #')
 worksheet.cell(1, 2, 'Course Number - Section Number')
 worksheet.cell(1, 3, 'Course Title')
 worksheet.cell(1, 4, 'Day Class Meets')
-worksheet.cell(1, 5, 'Time Course Meets')
+worksheet.cell(1, 5, 'Time Class Meets')
 worksheet.cell(1, 6, 'Credits')
 worksheet.cell(1, 7, 'Instructor')
 
 data = []
 for row in course_table.find_all('tr'):
     for cell in row.find_all('td'):
-        data.append(cell.text)
+        data.append(cell.text.strip())
+
+
+for result in data:
+    if result == '':
+        data.remove(result)
 
 for index, result in enumerate(data):
-    worksheet.cell(index + 1, 1, result)
+    row = index + 2
+    worksheet.cell(row, 1, result)
 
-print(data)
 
 workbook.save('itec_courses.xlsx')
-
+print(data)
 
 # TODO: figure out how to get rid of extra characters and add data to spreadsheet
