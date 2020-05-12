@@ -26,7 +26,7 @@ worksheet.cell(1, 5, 'Day Class Meets')
 worksheet.cell(1, 6, 'Time Class Meets')
 worksheet.cell(1, 7, 'Credits')
 worksheet.cell(1, 8, 'Instructor')
-row = 2
+ss_row = 2
 for row in course_table.find_all('tr'):
     data = []
     for cell in row.find_all('td'):
@@ -34,13 +34,15 @@ for row in course_table.find_all('tr'):
     for result in data:
         if result == '':
             data.remove(result)
-    worksheet.cell(row, 1, data[0])
-    worksheet.cell(row, 2, data[2])
-    worksheet.cell(row, 3, data[3])
-    worksheet.cell(row, 4, data[4])
-    worksheet.cell(row, 5, data[6])
-    worksheet.cell(row, 6, data[7])
-    worksheet.cell(row, 7, data[8])
-    worksheet.cell(row, 8, data[10])
-    row += 1
+    if len(data):
+        worksheet.cell(ss_row, 1, data[0])
+        worksheet.cell(ss_row, 2, data[2])
+        worksheet.cell(ss_row, 3, data[3])
+        worksheet.cell(ss_row, 4, data[4])
+        worksheet.cell(ss_row, 5, data[6])
+        worksheet.cell(ss_row, 6, data[7])
+        worksheet.cell(ss_row, 7, data[8])
+        worksheet.cell(ss_row, 8, data[10])
+        ss_row += 1
+
 workbook.save('itec_courses.xlsx')
